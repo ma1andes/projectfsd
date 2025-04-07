@@ -1,0 +1,125 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Variants */
+.button--primary {
+  background-color: #3498db;
+  color: white;
+}
+
+.button--primary:hover {
+  background-color: #2980b9;
+  transform: translateY(-1px);
+}
+
+.button--primary:active {
+  transform: translateY(0);
+}
+
+.button--secondary {
+  background-color: #f8f9fa;
+  color: #2c3e50;
+  border: 1px solid #dee2e6;
+}
+
+.button--secondary:hover {
+  background-color: #e9ecef;
+  transform: translateY(-1px);
+}
+
+.button--secondary:active {
+  transform: translateY(0);
+}
+
+.button--outline {
+  background-color: transparent;
+  color: #3498db;
+  border: 1px solid #3498db;
+}
+
+.button--outline:hover {
+  background-color: rgba(52, 152, 219, 0.1);
+  transform: translateY(-1px);
+}
+
+.button--outline:active {
+  transform: translateY(0);
+}
+
+.button--text {
+  background-color: transparent;
+  color: #3498db;
+  padding: 0;
+}
+
+.button--text:hover {
+  color: #2980b9;
+  text-decoration: underline;
+}
+
+/* Sizes */
+.button--small {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+.button--medium {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+}
+
+.button--large {
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+}
+
+/* States */
+.button--full-width {
+  width: 100%;
+}
+
+.button--disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Focus styles */
+.button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+}
+
+/* Loading state */
+.button--loading {
+  position: relative;
+  pointer-events: none;
+}
+
+.button--loading::after {
+  content: "";
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  border-right-color: transparent;
+  animation: button-spinner 0.75s linear infinite;
+}
+
+@keyframes button-spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
