@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CustomUser, Posts
+from .models import CustomUser
 
 class CustomUserForm(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
@@ -16,17 +16,3 @@ class CustomUserForm(serializers.ModelSerializer):
         user.set_password(validated_data['password'])
         user.save()
         return user
-
-class PostsSerializer(serializers.ModelSerializer):
-    title = serializers.CharField(required=True)
-    content = serializers.CharField(required=True)
-    owner = serializers.PrimaryKeyRelatedField(queryset=CustomUser.objects.all(), required=True)
-    
-    class Meta:
-        model = Posts
-        fields = ['id', 'title', 'content', 'owner']
-        
-    def to_representation(self, instance):
-        representation = super().to_representation(instance)
-        representation['owner'] = instance.owner.username
-        return representation

@@ -1,21 +1,21 @@
 from rest_framework import viewsets, status
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
-from .models import CustomUser, Posts
-from .serializers import CustomUserForm, PostsSerializer
+from .models import CustomUser
+from .serializers import CustomUserForm
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserForm
-    permission_classes = [AllowAny]  # Allow registration without authentication
+    permission_classes = [IsAuthenticated]
 
-class PostViewSet(viewsets.ModelViewSet):
-    queryset = Posts.objects.all()
-    serializer_class = PostsSerializer
-    permission_classes = [AllowAny]  # Allow anyone to create posts for testing
+    def get_permissions(self):
+        if self.action == 'create':
+            return [AllowAny()]
+        return super().get_permissions()
 
 @api_view(['POST'])
 @permission_classes([AllowAny])

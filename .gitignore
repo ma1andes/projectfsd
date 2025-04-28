@@ -1,0 +1,21 @@
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp 

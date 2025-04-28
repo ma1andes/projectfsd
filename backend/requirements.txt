@@ -1,0 +1,27 @@
+# Django и основные зависимости
+Django==5.0.2
+djangorestframework==3.14.0
+django-cors-headers==4.3.1
+drf-yasg==1.21.7
+
+# Аутентификация
+djangorestframework-simplejwt==5.3.1
+
+# База данных
+psycopg2-binary==2.9.9  # для PostgreSQL
+# или
+# mysqlclient==2.2.1  # для MySQL
+
+# Утилиты
+python-dotenv==1.0.1
+Pillow==10.2.0  # для работы с изображениями
+
+# Тестирование
+pytest==8.0.0
+pytest-django==4.7.0
+pytest-cov==4.1.0
+
+# Разработка
+black==24.1.1  # форматирование кода
+flake8==7.0.0  # линтер
+isort==5.13.2  # сортировка импортов 

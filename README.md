@@ -1,114 +1,164 @@
-# Проект Full Stack приложения
+# Social Network Project
 
-## Описание проекта
-
-Данный проект представляет собой полноценное веб-приложение, построенное с использованием следующих технологий:
-
-### Клиентская часть (Frontend)
-
-- React (v18.2.0)
-- React Router DOM для маршрутизации
-- Vite как инструмент сборки
-- CSS для стилизации
-
-### Серверная часть (Backend)
-
-- Django (v5.2)
-- Django REST Framework для API
-- SQLite в качестве базы данных
-- Token-аутентификация для безопасности
-
-## Функциональность проекта
-
-Приложение предоставляет следующие возможности:
-
-- Регистрация и авторизация пользователей
-- Просмотр, создание и управление постами
-- Работа с категориями
-- Профиль пользователя
-- Защищенные маршруты с авторизацией
+Полноценная социальная сеть с бэкендом на Django и фронтендом на React.
 
 ## Структура проекта
 
-Проект разделен на две основные части:
-
-- `/client` - клиентская часть (React)
-- `/backend` - серверная часть (Django)
-
-## Инструкция по запуску
-
-### Запуск серверной части (Backend)
-
-1. Перейдите в папку backend:
-
 ```
+projectfsd/
+├── backend/                 # Django бэкенд
+│   ├── backend/            # Основные настройки Django
+│   ├── posts/              # Приложение для постов, комментариев и лайков
+│   ├── user/               # Приложение для пользователей и аутентификации
+│   ├── requirements.txt    # Зависимости Python
+│   └── manage.py          # Утилита управления Django
+│
+└── client/                 # React фронтенд
+    ├── src/               # Исходный код React
+    ├── public/            # Статические файлы
+    └── package.json       # Зависимости Node.js
+```
+
+## Технологии
+
+### Backend
+
+- Django 5.0.2
+- Django REST Framework 3.14.0
+- JWT аутентификация
+- Swagger документация
+- PostgreSQL/MySQL (опционально)
+- pytest для тестирования
+
+### Frontend
+
+- React 18
+- Vite
+- React Router 6
+- Material-UI
+- React Query
+- Zustand
+- Axios
+- React Hook Form
+- Yup
+
+## Установка и запуск
+
+### Backend
+
+1. Создайте виртуальное окружение:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate  # для Linux/Mac
+.venv\Scripts\activate     # для Windows
+```
+
+2. Установите зависимости:
+
+```bash
 cd backend
+pip install -r requirements.txt
 ```
 
-2. Создайте и активируйте виртуальное окружение:
+3. Настройте базу данных в `backend/backend/settings.py`
 
-```
-python -m venv venv
-# Для Windows
-venv\Scripts\activate
-# Для Linux/MacOS
-source venv/bin/activate
-```
+4. Примените миграции:
 
-3. Установите необходимые зависимости:
-
-```
-pip install django djangorestframework django-cors-headers
-```
-
-4. Выполните миграции:
-
-```
+```bash
 python manage.py migrate
 ```
 
 5. Запустите сервер:
 
-```
+```bash
 python manage.py runserver
 ```
 
-Сервер будет доступен по адресу: http://127.0.0.1:8000/
+### Frontend
 
-### Запуск клиентской части (Frontend)
+1. Установите зависимости:
 
-1. Перейдите в папку client:
-
-```
+```bash
 cd client
-```
-
-2. Установите необходимые зависимости:
-
-```
 npm install
 ```
 
-3. Запустите приложение в режиме разработки:
+2. Запустите сервер разработки:
 
-```
+```bash
 npm run dev
 ```
 
-Клиентская часть будет доступна по адресу: http://localhost:5173/
+## API Endpoints
 
-## Маршруты приложения
+### Аутентификация
 
-- `/` - Главная страница
-- `/posts` - Страница со всеми постами
-- `/posts/:id` - Страница отдельного поста
-- `/create-post` - Страница создания поста
-- `/category-create` - Страница создания категории
-- `/auth` - Страница авторизации
-- `/reg` - Страница регистрации
-- `/profile` - Профиль пользователя
+- `POST /login/` - Вход в систему
+- `POST /logout/` - Выход из системы
 
-## Требования
+### Пользователи
 
-- Node.js и npm для клиентской части
-- Python 3.x для серверной части
+- `GET /users/` - Список пользователей
+- `POST /users/` - Регистрация нового пользователя
+
+### Посты
+
+- `GET /posts/` - Список всех постов
+- `POST /posts/create/` - Создание поста
+- `GET /posts/<id>/detail/` - Детали поста
+- `PUT /posts/<id>/update/` - Обновление поста
+- `DELETE /posts/<id>/delete/` - Удаление поста
+
+### Комментарии
+
+- `GET /posts/<post_id>/comments/` - Список комментариев к посту
+- `POST /posts/<post_id>/comments/create/` - Создание комментария
+- `DELETE /posts/comments/<comment_id>/delete/` - Удаление комментария
+
+### Лайки
+
+- `POST /posts/<post_id>/like/` - Поставить лайк
+- `DELETE /posts/<post_id>/unlike/` - Убрать лайк
+- `GET /posts/<post_id>/likes/count/` - Количество лайков
+
+## Документация API
+
+Swagger UI доступен по адресу:
+
+- http://localhost:8000/swagger/
+- http://localhost:8000/redoc/
+
+## Тестирование
+
+### Backend
+
+```bash
+cd backend
+pytest
+```
+
+### Frontend
+
+```bash
+cd client
+npm test
+```
+
+## Разработка
+
+### Backend
+
+- Используйте black для форматирования кода
+- Используйте flake8 для проверки стиля
+- Используйте isort для сортировки импортов
+
+### Frontend
+
+- Используйте ESLint для проверки кода
+- Используйте Prettier для форматирования
+- Используйте SASS для стилей
+
+## Лицензия
+
+BSD License
